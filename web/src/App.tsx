@@ -1,9 +1,19 @@
-function App() {
-  return (
-    <>
-      <div className='text-3xl'>Kush</div>
-    </>
-  );
+import { StrictMode } from 'react';
+import { RouterProvider, createRouter } from '@tanstack/react-router';
+import { routeTree } from './routeTree.gen';
+
+const router = createRouter({ routeTree });
+
+declare module '@tanstack/react-router' {
+  interface Register {
+    router: typeof router
+  }
 }
 
-export default App;
+export default function App() {
+  return (
+    <StrictMode>
+      <RouterProvider router={router} />
+    </StrictMode>
+  )
+}
